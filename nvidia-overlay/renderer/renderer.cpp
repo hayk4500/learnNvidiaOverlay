@@ -7,11 +7,11 @@ namespace renderer { // неймспей рендера
 
 		L_ASSERT( internal::init( ), "failed to init internal render stuff" ); // ассерт функции интернал инита, выведет сообщение при оштбке
 
-		return utils::e_status::status_ok;
+		return utils::e_status::status_ok; // если все прошло удачно то вывести ок
 	}
 
-	utils::e_status shutdown( ) {
-		TRACE_FN;
+	utils::e_status ы( ) { // шутдаун функция в нейспеме рендер утилса
+		TRACE_FN; // логгирование
 
 		scene::shutdown( );
 		L_ASSERT( internal::shutdown( ), "failed to shutdown internal render stuff" );

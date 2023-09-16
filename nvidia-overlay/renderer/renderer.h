@@ -5,14 +5,14 @@
 #include <unordered_map>
 
 
-namespace renderer {
+namespace renderer { // неймспейс рендеред
 	// @note: es3n1n: if you are scared of stl n shit then you can hardcode all colors/fonts in their namespaces
 
-	namespace colors {
-		inline std::unordered_map<uint32_t, ID2D1SolidColorBrush*> _colors = {};
+	namespace colors { // вложенный неймспейс рендер калорс
+		inline std::unordered_map<uint32_t, ID2D1SolidColorBrush*> _colors = {}; // короче это стандартный шаблон который управляет последовательностую элементов в данном случае задание тип юинт32 и солид бруш который закрашиывает область сплощным цветом назвазние _колорс
 
-		ID2D1SolidColorBrush* get( uint32_t col );
-		utils::e_status shutdown( );
+		ID2D1SolidColorBrush* get( uint32_t col ); // обьявление функции гет которая возврашает тип солид бруш то есть закрашивание области сплошным цветом аргумент тут один это юинт32 с названием кол скорее всего это код цвета
+		utils::e_status shutdown( ); // обьявление функции шутдаун в нейспейсе утилс и возврашает значение е статус
 	}
 
 	namespace fonts {
@@ -33,8 +33,8 @@ namespace renderer {
 		void shutdown( );
 	}
 
-	utils::e_status init( );
-	utils::e_status shutdown( );
+	utils::e_status init( ); // обьявление функции инита в статус утилсов
+	utils::e_status shutdown( ); // обьявление функции шутдаун в статус утилсов
 }
 
 

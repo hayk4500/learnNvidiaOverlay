@@ -1,11 +1,11 @@
 #include "renderer.h"
 
-namespace renderer {
-	namespace colors {
-		ID2D1SolidColorBrush* get( uint32_t col ) {
-			if ( _colors.find( col ) != _colors.end( ) )
-				return _colors.at( col );
-			_colors[ col ] = NULL;
+namespace renderer { // неймспей рендер
+	namespace colors { // пространство имён калор
+		ID2D1SolidColorBrush* get( uint32_t col ) { // определение функции гет который имеет тип ретурна солид бруш, принимает аргумент один это юинт32 кол
+			if ( _colors.find( col ) != _colors.end( ) ) // калорс это переменная из стд анордеред мап, сравнивается с финд и енд. Финд определяет элемент, который соответсвует ключу, а энд задает конец управляемой последоватлеьню. То есть логика в том, есои текущий ключ не конец то делать
+				return _colors.at( col ); // если не конец то вовзрашает калорс ат, ат это поиск элемента с заданным ключом, передается как кол аргумент
+			_colors[ col ] = NULL; // инпче пойдет присваивание колорса по индексу кол нулл
 			internal::m_render_target->CreateSolidColorBrush( D2D1::ColorF( col ), &_colors.at( col ) );
 			return ::renderer::colors::get( col );
 		}

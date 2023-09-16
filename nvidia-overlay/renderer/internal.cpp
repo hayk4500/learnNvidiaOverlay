@@ -7,39 +7,39 @@ namespace renderer { // неймспейс рендере
 			TRACE_FN; // логгирование
 
 			L_ASSERT( !FAILED( // ассерт НЕ ФАЙИЛЕД, этот файлед вообще из стандартной либы
-				D2D1CreateFactory( D2D1_FACTORY_TYPE_SINGLE_THREADED, &m_d2d ) 
-			), "failed to create render factory" );
-			L_ASSERT( !FAILED( 
-				DWriteCreateFactory( 
-					DWRITE_FACTORY_TYPE_SHARED, 
-					__uuidof( IDWriteFactory ), 
-					reinterpret_cast< IUnknown** >( ( &m_factory ) )
+				D2D1CreateFactory( D2D1_FACTORY_TYPE_SINGLE_THREADED, &m_d2d ) // функция создает фабрику для производства графики директ2д. В первый аргумент задается тип фабрики, тут он тип сингл тредный, синса нет, второй вргумент идёт как ссылка на Ссылка на IID ID2D1Factory Создает ресурсы Direct2D
+			), "failed to create render factory" ); // если фейл, то выдает сообщение по факту такое же логгирование как и все остальные
+			L_ASSERT( !FAILED( // ассерт фейла функции врайт креат фактори
+				DWriteCreateFactory( // функция которая создает отдельные обьекты фабрики которая была выше, принимает по документации три аргумента: тип фактора, какой то гу айди который определяет интерфейс фабрики, третий это адрес указателя на вновь созданный обьект
+					DWRITE_FACTORY_TYPE_SHARED, // в данном случае создается тип шаред, который является общей и позволяет повторно использовать данные шрифтов и прочее короче
+					__uuidof( IDWriteFactory ), // стандартный аргумент, который передается вот ээтот ююдоиф и айди врайт фактори
+					reinterpret_cast< IUnknown** >( ( &m_factory ) ) // адрес указателя на вновь созданный обьекти фабрики директ врайт
 				) 
-			), "failed to create factory" );
+			), "failed to create factory" ); // короче если фейл будет этой функции то показывает это сообщениие
 
-			L_ASSERT( !FAILED( m_d2d->CreateHwndRenderTarget(
-				D2D1::RenderTargetProperties( 
-					D2D1_RENDER_TARGET_TYPE_DEFAULT,
-					D2D1::PixelFormat( DXGI_FORMAT_UNKNOWN, D2D1_ALPHA_MODE_PREMULTIPLIED )
+			L_ASSERT( !FAILED( m_d2d->CreateHwndRenderTarget( // ассерт функции целевого обьекта отрисовки. Выделяется видеопамять для отрисовки всего этого тут передается через указатель от переменной m_d2d
+				D2D1::RenderTargetProperties( // функция которая создает структуру эту, в которой прописываются параметры отрисовки, формат пикселей, сведения о ДПИ и прочее такое
+					D2D1_RENDER_TARGET_TYPE_DEFAULT, // этот арргумент функции говорит что будет использоваться аппаратная отрисовка, но если будет недоступно то сделает программную отрисовку
+					D2D1::PixelFormat( DXGI_FORMAT_UNKNOWN, D2D1_ALPHA_MODE_PREMULTIPLIED ) // задает формат пикселей и альфа режима размер каналов и прочее пикселей тут сложная хрень дефоль анноун прописывается, альфа мод выбран как 1, там каждый цвет сначала масшатибтися по альфа значению. 
 				),
-				D2D1::HwndRenderTargetProperties(
-					overlay::vars::m_window_hwnd,
-					overlay::vars::m_window_size
+				D2D1::HwndRenderTargetProperties( // функция которая создает структуру, таргер пропертиес, тут указывается хендо ркна и размер в пикселях
+					overlay::vars::m_window_hwnd, // передается хендл овереля
+					overlay::vars::m_window_size // передается размер окна как виндов сайз который у нас есть в файле оверлея, тут оттуда берется эта переменная
 				),
-				&m_render_target
-			) ), "failed to create render target" );
+				&m_render_target // ссылка на обьект куда надо рисовать или что типа того
+			) ), "failed to create render target" ); // вывести сообщение при неудаче функции
 
-			return utils::e_status::status_ok;
+			return utils::e_status::status_ok; // возвращает статус ок если все дошло до этого кода
 		}
 
-		utils::e_status shutdown( ) {
-			TRACE_FN;
+		utils::e_status shutdown( ) { // утилс функции шутдауна, определение
+			TRACE_FN; // логгирование
 
-			m_d2d->Release( );
-			m_factory->Release( );
-			m_render_target->Release( );
+			m_d2d->Release( ); // указатель на функцию релиз от переменной самого фактора короче этот релих связан с анноу либо или что там графическим
+			m_factory->Release( ); // указатель на релиз от отдельных обьектов фабрики
+			m_render_target->Release( ); // указатель на релиз от старта рисовки обьекта
 
-			return utils::e_status::status_ok;
+			return utils::e_status::status_ok; // вернуть статус ок
 		}
 	}
 }
