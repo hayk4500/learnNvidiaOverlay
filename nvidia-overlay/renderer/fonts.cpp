@@ -1,12 +1,12 @@
 #include "renderer.h"
 
 
-namespace renderer {
-	namespace fonts {
-		IDWriteTextFormat* get( const char* name, float size ) {
-			char _id[ 256 ];
-			sprintf_s( _id, "%s_%f", name, size );
-			const uint32_t id = hash::fnv1<uint32_t>::hash( _id );
+namespace renderer { // пространство имен рендерер
+	namespace fonts { // вложенное пространство имен рендерер фонтс
+		IDWriteTextFormat* get( const char* name, float size ) { // определдение функции гета принимает аргумент констр чар и флоат
+			char _id[ 256 ]; // массив из символов 256 длинной
+			sprintf_s( _id, "%s_%f", name, size ); // спринтует записывает у буфер с айди переменную имя и размер переданных значений
+			const uint32_t id = hash::fnv1<uint32_t>::hash( _id ); // инициация айди с типом юинт32т константа, присваиваетс хэш
 
 			if ( _fonts.find( id ) != _fonts.end( ) )
 				return _fonts.at( id );

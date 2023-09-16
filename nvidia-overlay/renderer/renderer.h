@@ -15,10 +15,10 @@ namespace renderer { // неймспейс рендеред
 		utils::e_status shutdown( ); // обьявление функции шутдаун в нейспейсе утилс и возврашает значение е статус
 	}
 
-	namespace fonts {
-		inline std::unordered_map<uint32_t,  IDWriteTextFormat*> _fonts = {};
+	namespace fonts { // пространство имёт фонтс
+		inline std::unordered_map<uint32_t,  IDWriteTextFormat*> _fonts = {}; // стандартная либа шаблонов с привязкой ключ значение, тип юинт32т и IDWriteTextFormat это интерфейс который описывает свойства шрифта и абзаца
 
-		IDWriteTextFormat* get( const char* name, float size );
+		IDWriteTextFormat* get( const char* name, float size ); // обьявление функции гет, которая возвращает разименователь айдиврафттекстформат, принимате аргумент ытип констр чара как имя и флоата как размера
 		utils::e_status shutdown( );
 	}
 

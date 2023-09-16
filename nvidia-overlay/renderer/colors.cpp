@@ -6,17 +6,17 @@ namespace renderer { // неймспей рендер
 			if ( _colors.find( col ) != _colors.end( ) ) // калорс это переменная из стд анордеред мап, сравнивается с финд и енд. Финд определяет элемент, который соответсвует ключу, а энд задает конец управляемой последоватлеьню. То есть логика в том, есои текущий ключ не конец то делать
 				return _colors.at( col ); // если не конец то вовзрашает калорс ат, ат это поиск элемента с заданным ключом, передается как кол аргумент
 			_colors[ col ] = NULL; // инпче пойдет присваивание колорса по индексу кол нулл
-			internal::m_render_target->CreateSolidColorBrush( D2D1::ColorF( col ), &_colors.at( col ) );
-			return ::renderer::colors::get( col );
+			internal::m_render_target->CreateSolidColorBrush( D2D1::ColorF( col ), &_colors.at( col ) ); // создает кисть сплошного цвета с заданным цветом, тут цвет передтся через пременнюу кол
+			return ::renderer::colors::get( col ); // возвращается рендер калор гет и сам цвет
 		}
 
-		utils::e_status shutdown( ) {
-			TRACE_FN;
+		utils::e_status shutdown( ) { // определние функции шутдаун который имеет тип утилка е статуса
+			TRACE_FN; // логирование
 
-			for ( auto&& p : _colors )
-				p.second->Release( );  // @note: es3n1n: why would i care, nullptr here is an unexpected behavior!
+			for ( auto&& p : _colors ) // цикл, который задаетя для калорса этот вид цикла для С++11 стандарта, тут тип буква п как первое и калорс на последне переменная п авто, тут ей присвается тип юинт32 калорбрущсолид
+				p.second->Release( );  // @note: es3n1n: why would i care, nullptr here is an unexpected behavior! Я так и не понял что это за релиз дп похуй потом посмотрим все таки
 
-			return utils::e_status::status_ok;
+			return utils::e_status::status_ok; // возврашает статус ок
 		}
 	}
 }

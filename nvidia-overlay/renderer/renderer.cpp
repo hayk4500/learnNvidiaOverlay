@@ -10,7 +10,7 @@ namespace renderer { // неймспей рендера
 		return utils::e_status::status_ok; // если все прошло удачно то вывести ок
 	}
 
-	utils::e_status ы( ) { // шутдаун функция в нейспеме рендер утилса
+	utils::e_status shutdown( ) { // шутдаун функция в нейспеме рендер утилса
 		TRACE_FN; // логгирование
 
 		scene::shutdown( );
